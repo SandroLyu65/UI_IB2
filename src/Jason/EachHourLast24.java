@@ -27,22 +27,28 @@ public class EachHourLast24 extends ParseJason{
 
     public void setLists(){
         try {
-            int endHour = 0;
-            if(getNowHour() == 0)
+            int endHour = getNowHour();
+            /*if(getNowHour() == 0)
                 endHour = 23;
             else
                 endHour = getNowHour() - 1;
-
-            for(int i = getNowHour(); i < 24; i++){
+            */
+            /*for(int i = getNowHour(); i < 24; i++){
                 String url = basicUrl + i + ":00:00/" + i + ":59:59/" + getYesterday() ;
                 addToList(i, url);
-            }
+            }*/
 
             for(int i = 0; i <= endHour; i++){
                 String url = basicUrl + i + ":00:00/" + i + ":59:59/" + getToday();
                 addToList(i, url);
             }
 
+            if(endHour < 24){
+                for(int i = endHour + 1; i < 24; i++){
+                    String url = basicUrl + i + ":00:00/" + i + ":59:59/" + getToday();
+                    addToList(i, url);
+                }
+            }
             for(int i = 0; i < eachHour.size(); i++){
                 double sumSoFar = 0.0;
                 for(int j = 0; j <= i; j++){
@@ -70,20 +76,12 @@ public class EachHourLast24 extends ParseJason{
     public int getNowHour(){
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH");
-        //return Integer.parseInt(sdf.format(cal.getTime()));
-        return 10;
-    }
-
-    public String getYesterday(){
-        LocalDate todayDate = LocalDate.now();
-        //return String.valueOf(todayDate.minusDays(1));
-        return "2022-03-23";
+        return Integer.parseInt(sdf.format(cal.getTime()));
     }
 
     public String getToday(){
         LocalDate todayDate = LocalDate.now();
-        //return String.valueOf(todayDate);
-        return "2022-03-24";
+        return String.valueOf(todayDate);
     }
 
     public ArrayList<String> getHours() {

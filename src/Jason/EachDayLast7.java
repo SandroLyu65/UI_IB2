@@ -23,7 +23,7 @@ public class EachDayLast7 extends ParseJason{
 
     public void setLists(){
         try {
-            for(int i = 7; i >= 1; i--){
+            for(int i = 6; i >= 0; i--){
                 String url = basicUrl + getDaysString(i);
                 addToList(getDaysString(i).substring(5), url);
             }
@@ -45,8 +45,8 @@ public class EachDayLast7 extends ParseJason{
     }
 
     public String getDaysString(int minusDay){
-        //LocalDate todayDate = LocalDate.now();
-        LocalDate todayDate = LocalDate.of(2022,3,24);
+        LocalDate todayDate = LocalDate.now();
+        //LocalDate todayDate = LocalDate.of(2022,3,24);
         return String.valueOf(todayDate.minusDays(minusDay));
     }
 

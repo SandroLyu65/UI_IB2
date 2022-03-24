@@ -14,6 +14,7 @@ public class InitialChart {
     private static final DefaultCategoryDataset lineChartDataSet = new DefaultCategoryDataset();
     private static final DefaultCategoryDataset barChartDayDataset = new DefaultCategoryDataset();
     private static final DefaultPieDataset pieChartDataset = new DefaultPieDataset();
+    private static final DefaultCategoryDataset lineBase = new DefaultCategoryDataset();
     private static double eachDayGoal = 3.0;
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
@@ -26,6 +27,7 @@ public class InitialChart {
         lineChartDataSet.clear();
         barChartDayDataset.clear();
         pieChartDataset.clear();
+        lineBase.clear();
 
         EachHourLast24 eachHourLast24 = new EachHourLast24();
         eachHourLast24.setLists();
@@ -45,7 +47,7 @@ public class InitialChart {
         double sumEachDayByGoal = 0.0;
         for(int i = 0; i < 7; i++){
             barChartDayDataset.addValue(eachDay.get(i), "water", days.get(i));
-
+            lineBase.addValue(eachDayGoal,"water",days.get(i));
             double eachDayByGoal = Double.parseDouble(df.format(eachDay.get(i)/eachDayGoal));
             if(eachDayByGoal>=1.000)
                 eachDayByGoal=1.000;
@@ -72,6 +74,8 @@ public class InitialChart {
     public static DefaultCategoryDataset getBarChartDayDataset() {
         return barChartDayDataset;
     }
+
+    public static DefaultCategoryDataset getLineBase() {return lineBase;}
 
     public static DefaultPieDataset getPieChartDataset(){
         return pieChartDataset;

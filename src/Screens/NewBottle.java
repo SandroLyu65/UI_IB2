@@ -4,25 +4,37 @@ import ChartTable.InitialChart;
 import ChartTable.InitialTable;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class NewBottle extends JFrame{
     private JPanel newBottlePanel;
     private JTextField newBottleNameTextField;
     private JButton saveButton;
     private JLabel newBottleNameLabel;
+    private JLabel newCapacityLabel;
+    private JTextField newCapacityTextField;
+    private JButton chooser;
+    private JLabel newPictureLabel;
+    private JLabel newPicturePath;
+    private JButton BackToBottle;
 
     public NewBottle(String title) {
         super(title);
         setContentPane(newBottlePanel);
+        newBottlePanel.setPreferredSize(new Dimension(600,400));
+        newPicturePath.setSize(50,0);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    InitialTable.addToTable(newBottleNameTextField.getText());
+                    InitialTable.insertRecord(newBottleNameTextField.getText(),newCapacityTextField.getText());
+                    InitialTable.initialArray();
                     NewBottle.super.dispose();
                     JFrame bottles = new Bottles("Bottles");
                     bottles.setVisible(true);
@@ -33,5 +45,47 @@ public class NewBottle extends JFrame{
                 }
             }
         });
+
+
+        chooser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser jFileChooser = new JFileChooser();
+                jFileChooser.setMultiSelectionEnabled(true);
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg","png");
+                jFileChooser.setFileFilter(filter);
+                int returnVal = jFileChooser.showOpenDialog(chooser);
+                if (returnVal == jFileChooser.APPROVE_OPTION){
+                    File[] arrfiles = jFileChooser.getSelectedFiles();
+                    if(arrfiles == null || arrfiles.length == 0){
+                        return;
+                    }
+                    File file = jFileChooser.getSelectedFile();
+                    String fileName = file.getName();
+                    String prefix = fileName.substring(fileName.lastIndexOf(".")+1);
+                    if(!(prefix.equals("jpg")||prefix.equals("png"))){
+                        JOptionPane.showMessageDialog(new JDialog(),":Please select .jpg or .png file");
+                        return;
+                    }
+                    String absolutePath = jFileChooser.getSelectedFile().getAbsolutePath();
+                    newPicturePath.setText(absolutePath);
+                }
+            }
+        });
+        BackToBottle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    NewBottle.super.dispose();
+                    JFrame bottles = new Bottles("Bottles");
+                    bottles.setVisible(true);
+                    bottles.pack();
+                }
+                catch (Exception b){
+                    newBottleNameTextField.setText("Do that again");
+                }
+            }
+        });
     }
 }
+
