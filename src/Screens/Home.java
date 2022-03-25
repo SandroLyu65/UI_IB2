@@ -28,6 +28,9 @@ public class Home extends JFrame {
     private JButton refreshButton;
     private JPanel barChartDayPanel;
     private JPanel bottlesPanel;
+    private JLabel todayGoalLabel;
+    private JLabel alreadyDrankLabel;
+    private JLabel amountLabel;
     private JPanel pieChartPanel;
 
     public Home(String title) {
@@ -69,6 +72,10 @@ public class Home extends JFrame {
                 home.pack();
             }
         });
+
+        alreadyDrankLabel.setText("Already drank:" + InitialGoal.getTodayFinished());
+        amountLabel.setText("You need " + (int) Math.ceil(InitialChart.getEachDayGoal()/ InitialGoal.getCapacity()) + " bottles");
+        todayGoalLabel.setText("Goal today: " + InitialChart.getEachDayGoal());
     }
 
     private void createUIComponents() {
@@ -140,22 +147,3 @@ public class Home extends JFrame {
         return bottlesChart;
     }
 }
-
-/*
-bottlesPlot.setBackgroundPaint(Color.WHITE);
-        bottlesPlot.setRangeZeroBaselinePaint(Color.RED);
-        bottlesPlot.setOutlineVisible(false);
-        bottlesPlot.setRangeGridlinePaint(Color.white);
-        bottlesPlot.setDomainGridlinePaint(Color.BLUE);
-
-        final CategoryAxis categoryAxis = plot.getDomainAxis();
-        categoryAxis.setAxisLineVisible(false);
-        categoryAxis.setVisible(false);
-        categoryAxis.setTickMarksVisible(false);
-
-        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-        //rangeAxis.setAxisLineVisible(false);
-        rangeAxis.setVisible(false);
-        rangeAxis.setLabelPaint(Color.BLUE);
-        rangeAxis.setRange(0, 3);
- */

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class InitialBottles {
-    //private static Object[][] data = {{"id","path","name","capacity"}};
-    //private static ArrayList<String> paths = new ArrayList<>(4);
     private static final BottlesInfo BottlesInfo = new BottlesInfo();
     private static final ArrayList<Icon> icons = new ArrayList<>(4);
     private static ArrayList<String> names = new ArrayList<>(4);

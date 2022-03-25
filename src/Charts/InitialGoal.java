@@ -5,8 +5,6 @@ import Jason.LEDInfo;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
 
-import java.util.ArrayList;
-
 public class InitialGoal extends InitialChart{
     private static double capacity = 0.5;
     private static double todayFinished = 3.1;
@@ -57,5 +55,13 @@ public class InitialGoal extends InitialChart{
 
     public static DefaultCategoryDataset getDataset(){
         return bottlesDataset;
+    }
+
+    public static double getCapacity() {
+        return capacity;
+    }
+
+    public static double getTodayFinished() {
+        return todayFinished;
     }
 }
