@@ -1,7 +1,7 @@
 package Screens;
 
-import ChartTable.InitialChart;
-import ChartTable.InitialTable;
+import Charts.InitialBottles;
+import Charts.InitialGoal;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -17,7 +17,7 @@ public class NewBottle extends JFrame{
     private JLabel newBottleNameLabel;
     private JLabel newCapacityLabel;
     private JTextField newCapacityTextField;
-    private JButton chooser;
+    private JButton selectFromFileButton;
     private JLabel newPictureLabel;
     private JLabel newPicturePath;
     private JButton BackToBottle;
@@ -33,8 +33,8 @@ public class NewBottle extends JFrame{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    InitialTable.insertRecord(newBottleNameTextField.getText(),newCapacityTextField.getText());
-                    InitialTable.initialArray();
+                    InitialBottles.insertRecord(newBottleNameTextField.getText(),newCapacityTextField.getText(),newPicturePath.getText());
+                    InitialBottles.setBottles();
                     NewBottle.super.dispose();
                     JFrame bottles = new Bottles("Bottles");
                     bottles.setVisible(true);
@@ -47,14 +47,14 @@ public class NewBottle extends JFrame{
         });
 
 
-        chooser.addActionListener(new ActionListener() {
+        selectFromFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser jFileChooser = new JFileChooser();
                 jFileChooser.setMultiSelectionEnabled(true);
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg","png");
                 jFileChooser.setFileFilter(filter);
-                int returnVal = jFileChooser.showOpenDialog(chooser);
+                int returnVal = jFileChooser.showOpenDialog(selectFromFileButton);
                 if (returnVal == jFileChooser.APPROVE_OPTION){
                     File[] arrfiles = jFileChooser.getSelectedFiles();
                     if(arrfiles == null || arrfiles.length == 0){
@@ -64,14 +64,15 @@ public class NewBottle extends JFrame{
                     String fileName = file.getName();
                     String prefix = fileName.substring(fileName.lastIndexOf(".")+1);
                     if(!(prefix.equals("jpg")||prefix.equals("png"))){
-                        JOptionPane.showMessageDialog(new JDialog(),":Please select .jpg or .png file");
+                        JOptionPane.showMessageDialog(new JDialog(),"Please open the .jpg or .png in './icons/'");
                         return;
                     }
-                    String absolutePath = jFileChooser.getSelectedFile().getAbsolutePath();
-                    newPicturePath.setText(absolutePath);
+                    //String absolutePath = jFileChooser.getSelectedFile().getAbsolutePath();
+                    newPicturePath.setText(fileName);
                 }
             }
         });
+
         BackToBottle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

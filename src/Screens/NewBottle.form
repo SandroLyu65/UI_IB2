@@ -15,7 +15,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please input the name of new bottle"/>
+          <text value="name"/>
         </properties>
       </component>
       <component id="ee06c" class="javax.swing.JButton" binding="saveButton">
@@ -50,7 +50,7 @@
         </constraints>
         <properties>
           <horizontalAlignment value="10"/>
-          <text value="Please input the capacity of new bottle"/>
+          <text value="capacity"/>
         </properties>
       </component>
       <component id="71e65" class="javax.swing.JLabel" binding="newPictureLabel">
@@ -61,7 +61,7 @@
           <text value="Pic:"/>
         </properties>
       </component>
-      <component id="5d369" class="javax.swing.JButton" binding="chooser">
+      <component id="5d369" class="javax.swing.JButton" binding="selectFromFileButton">
         <constraints>
           <grid row="0" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -74,7 +74,7 @@
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <text value="choose:"/>
         </properties>
       </component>
       <component id="26a38" class="javax.swing.JButton" binding="BackToBottle">

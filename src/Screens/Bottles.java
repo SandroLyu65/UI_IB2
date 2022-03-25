@@ -1,6 +1,7 @@
 package Screens;
 
-import ChartTable.InitialTable;
+import Charts.InitialBottles;
+import Charts.InitialGoal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,10 +14,10 @@ public class Bottles extends JFrame{
     private JLabel bottlesLabel;
     private JButton addBottleButton;
     private JButton deleteButton;
-    private JRadioButton radioButton1;
-    private JRadioButton radioButton2;
-    private JRadioButton radioButton3;
-    private JRadioButton radioButton4;
+    private JRadioButton selectRadioButton1;
+    private JRadioButton selectRadioButton2;
+    private JRadioButton selectRadioButton3;
+    private JRadioButton selectRadioButton4;
     private JLabel colName1;
     private JLabel colName2;
     private JLabel colName3;
@@ -33,16 +34,17 @@ public class Bottles extends JFrame{
     private JLabel cap2;
     private JLabel cap3;
     private JLabel cap4;
+    private JButton selectButton;
 
     public Bottles(String title){
         super(title);
         setContentPane(bottlesPanel);
         bottlesPanel.setPreferredSize(new Dimension(600,400));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        radioButton1.setVisible(false);
-        radioButton2.setVisible(false);
-        radioButton3.setVisible(false);
-        radioButton4.setVisible(false);
+        selectRadioButton1.setVisible(false);
+        selectRadioButton2.setVisible(false);
+        selectRadioButton3.setVisible(false);
+        selectRadioButton4.setVisible(false);
         pic1.setVisible(false);
         pic2.setVisible(false);
         pic3.setVisible(false);
@@ -55,45 +57,47 @@ public class Bottles extends JFrame{
         cap2.setVisible(false);
         cap3.setVisible(false);
         cap4.setVisible(false);
-        if(InitialTable.getNames().size() >= 1){
-            radioButton1.setVisible(true);
+
+        if(InitialBottles.getNames().size() >= 1){
+            selectRadioButton1.setVisible(true);
             pic1.setVisible(true);
             name1.setVisible(true);
             cap1.setVisible(true);
-            //pic1.setIcon(InitialTable.getIcons().get(1));
-            name1.setText(InitialTable.getNames().get(0));
-            cap1.setText(InitialTable.getCapacity().get(0));
+            pic1.setIcon(InitialBottles.getIcons().get(0));
+            name1.setText(InitialBottles.getNames().get(0));
+            cap1.setText(String.valueOf(InitialBottles.getCapacity().get(0)));
         }
 
-        if(InitialTable.getNames().size() >= 2){
-            radioButton2.setVisible(true);
+        if(InitialBottles.getNames().size() >= 2){
+            selectRadioButton2.setVisible(true);
             pic2.setVisible(true);
             name2.setVisible(true);
             cap2.setVisible(true);
-            //pic2.setIcon(InitialTable.getIcons().get(1));
-            name2.setText(InitialTable.getNames().get(1));
-            cap2.setText(InitialTable.getCapacity().get(1));
+            pic2.setIcon(InitialBottles.getIcons().get(1));
+            name2.setText(InitialBottles.getNames().get(1));
+            cap2.setText(String.valueOf(InitialBottles.getCapacity().get(1)));
         }
 
-        if(InitialTable.getNames().size() >= 3){
-            radioButton3.setVisible(true);
+        if(InitialBottles.getNames().size() >= 3){
+            selectRadioButton3.setVisible(true);
             pic3.setVisible(true);
             name3.setVisible(true);
             cap3.setVisible(true);
-            //pic3.setIcon(InitialTable.getIcons().get(2));
-            name3.setText(InitialTable.getNames().get(2));
-            cap3.setText(InitialTable.getCapacity().get(2));
+            pic3.setIcon(InitialBottles.getIcons().get(2));
+            name3.setText(InitialBottles.getNames().get(2));
+            cap3.setText(String.valueOf(InitialBottles.getCapacity().get(2)));
         }
 
-        if(InitialTable.getNames().size() == 4){
-            radioButton4.setVisible(true);
+        if(InitialBottles.getNames().size() == 4){
+            selectRadioButton4.setVisible(true);
             pic4.setVisible(true);
             name4.setVisible(true);
             cap4.setVisible(true);
-            //pic4.setIcon(InitialTable.getIcons().get(3));
-            name4.setText(InitialTable.getNames().get(3));
-            cap4.setText(InitialTable.getCapacity().get(3));
+            pic4.setIcon(InitialBottles.getIcons().get(3));
+            name4.setText(InitialBottles.getNames().get(3));
+            cap4.setText(String.valueOf(InitialBottles.getCapacity().get(3)));
         }
+
         bottlesToHome.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -113,33 +117,99 @@ public class Bottles extends JFrame{
                 newBottle.pack();
             }
         });
-        /*deleteButton.addActionListener(new ActionListener() {
+
+        deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(radioButton1.isSelected()){
-                    InitialTable.setAll(0);
+                if(selectRadioButton1.isSelected()){
+                    InitialBottles.deleteRecord(1);
                 }
-                else if(radioButton2.isSelected()){
-                    InitialTable.setAll(1);
+                else if(selectRadioButton2.isSelected()){
+                    InitialBottles.deleteRecord(2);
                 }
-                else if(radioButton3.isSelected()){
-                    InitialTable.setAll(2);
+                else if(selectRadioButton3.isSelected()){
+                    InitialBottles.deleteRecord(3);
                 }
                 else {
-                    InitialTable.setAll(3);
+                    InitialBottles.deleteRecord(4);
                 }
                 try {
+                    InitialBottles.setBottles();
                     Bottles.super.dispose();
                     JFrame bottles = new Bottles("Bottles");
                     bottles.setVisible(true);
                     bottles.pack();
                 }
                 catch (Exception b){
-
+                    b.printStackTrace();
                 }
             }
-        });*/
+        });
+
+        selectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(selectRadioButton1.isSelected()){
+                    InitialGoal.setCapacity(InitialBottles.getCapacity().get(0));
+                }
+                else if(selectRadioButton2.isSelected()){
+                    InitialGoal.setCapacity(InitialBottles.getCapacity().get(1));
+                }
+                else if(selectRadioButton3.isSelected()){
+                    InitialGoal.setCapacity(InitialBottles.getCapacity().get(2));
+                }
+                else if(selectRadioButton4.isSelected()){
+                    InitialGoal.setCapacity(InitialBottles.getCapacity().get(3));
+                }
+                else{
+                    InitialGoal.setCapacity(InitialBottles.getCapacity().get(0));
+                }
+                InitialGoal.setDataset();
+            }
+        });
+
+        selectRadioButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectRadioButton1.isSelected()) {
+                    selectRadioButton2.setSelected(false);
+                    selectRadioButton3.setSelected(false);
+                    selectRadioButton4.setSelected(false);
+                }
+            }
+        });
+
+        selectRadioButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectRadioButton2.isSelected()) {
+                    selectRadioButton1.setSelected(false);
+                    selectRadioButton3.setSelected(false);
+                    selectRadioButton4.setSelected(false);
+                }
+            }
+        });
+
+        selectRadioButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectRadioButton3.isSelected()) {
+                    selectRadioButton1.setSelected(false);
+                    selectRadioButton2.setSelected(false);
+                    selectRadioButton4.setSelected(false);
+                }
+            }
+        });
+
+        selectRadioButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectRadioButton4.isSelected()) {
+                    selectRadioButton1.setSelected(false);
+                    selectRadioButton2.setSelected(false);
+                    selectRadioButton3.setSelected(false);
+                }
+            }
+        });
     }
-
-
 }

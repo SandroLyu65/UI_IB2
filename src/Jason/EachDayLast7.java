@@ -46,7 +46,6 @@ public class EachDayLast7 extends ParseJason{
 
     public String getDaysString(int minusDay){
         LocalDate todayDate = LocalDate.now();
-        //LocalDate todayDate = LocalDate.of(2022,3,24);
         return String.valueOf(todayDate.minusDays(minusDay));
     }
 

@@ -15,28 +15,18 @@ public class EachHourLast24 extends ParseJason{
     private final String basicUrl;
     private final ArrayList<String> hours;
     private final ArrayList<Double> eachHour;
-    private final ArrayList<Double> cumulativeHour;
+    private double cummulative;
 
     public EachHourLast24() {
         super();
         this.basicUrl = "https://studev.groept.be/api/a21ib2d02/byHour_test_by_shengzhe_0310/";
         hours = new ArrayList<>();
         eachHour = new ArrayList<>();
-        cumulativeHour = new ArrayList<>();
     }
 
     public void setLists(){
         try {
             int endHour = getNowHour();
-            /*if(getNowHour() == 0)
-                endHour = 23;
-            else
-                endHour = getNowHour() - 1;
-            */
-            /*for(int i = getNowHour(); i < 24; i++){
-                String url = basicUrl + i + ":00:00/" + i + ":59:59/" + getYesterday() ;
-                addToList(i, url);
-            }*/
 
             for(int i = 0; i <= endHour; i++){
                 String url = basicUrl + i + ":00:00/" + i + ":59:59/" + getToday();
@@ -48,13 +38,6 @@ public class EachHourLast24 extends ParseJason{
                     String url = basicUrl + i + ":00:00/" + i + ":59:59/" + getToday();
                     addToList(i, url);
                 }
-            }
-            for(int i = 0; i < eachHour.size(); i++){
-                double sumSoFar = 0.0;
-                for(int j = 0; j <= i; j++){
-                    sumSoFar += eachHour.get(j);
-                }
-                cumulativeHour.add(sumSoFar);
             }
         }
         catch (JSONException e){
@@ -68,8 +51,10 @@ public class EachHourLast24 extends ParseJason{
 
         if(JSONObject.NULL.equals(curObject.get("sumByHour")))
             eachHour.add(0.0);
-        else
+        else {
             eachHour.add(parseDouble(curObject.getString("sumByHour")));
+            cummulative+=parseDouble(curObject.getString("sumByHour"));
+        }
         hours.add(String.valueOf(i));
     }
 
@@ -88,11 +73,11 @@ public class EachHourLast24 extends ParseJason{
         return hours;
     }
 
-    public ArrayList<Double> getEachHour() {
+    public ArrayList<Double> getAmountEachHour() {
         return eachHour;
     }
 
-    public ArrayList<Double> getCumulativeHour() {
-        return cumulativeHour;
+    public double getCummulative(){
+        return cummulative;
     }
 }
