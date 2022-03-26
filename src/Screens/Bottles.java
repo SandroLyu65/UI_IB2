@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 public class Bottles extends JFrame{
     private JButton bottlesToHome;
     private JPanel bottlesPanel;
-    private JLabel bottlesLabel;
     private JButton addBottleButton;
     private JButton deleteButton;
     private JRadioButton selectRadioButton1;
@@ -35,11 +34,12 @@ public class Bottles extends JFrame{
     private JLabel cap3;
     private JLabel cap4;
     private JButton selectButton;
+    private static final Font x = new Font("Monospaced",1,16);
 
     public Bottles(String title){
         super(title);
         setContentPane(bottlesPanel);
-        bottlesPanel.setPreferredSize(new Dimension(600,400));
+        bottlesPanel.setPreferredSize(new Dimension(600,350));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         selectRadioButton1.setVisible(false);
         selectRadioButton2.setVisible(false);
@@ -57,7 +57,10 @@ public class Bottles extends JFrame{
         cap2.setVisible(false);
         cap3.setVisible(false);
         cap4.setVisible(false);
-
+        colName1.setFont(x);
+        colName2.setFont(x);
+        colName3.setFont(x);
+        colName4.setFont(x);
         if(InitialBottles.getNames().size() >= 1){
             selectRadioButton1.setVisible(true);
             pic1.setVisible(true);
@@ -103,6 +106,8 @@ public class Bottles extends JFrame{
             public void actionPerformed(ActionEvent actionEvent) {
                 Bottles.super.dispose();
                 JFrame home = new Home("D2 project V1.0_0311");
+                String src = "./files/window.png";
+                home.setIconImage(new ImageIcon(src).getImage());
                 home.setVisible(true);
                 home.pack();
             };
@@ -113,6 +118,8 @@ public class Bottles extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Bottles.super.dispose();
                 JFrame newBottle = new NewBottle("New Bottle");
+                String src = "./files/window.png";
+                newBottle.setIconImage(new ImageIcon(src).getImage());
                 newBottle.setVisible(true);
                 newBottle.pack();
             }

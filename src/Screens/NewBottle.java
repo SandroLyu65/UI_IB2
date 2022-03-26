@@ -37,6 +37,8 @@ public class NewBottle extends JFrame{
                     InitialBottles.setBottles();
                     NewBottle.super.dispose();
                     JFrame bottles = new Bottles("Bottles");
+                    String src = "./files/window.png";
+                    bottles.setIconImage(new ImageIcon(src).getImage());
                     bottles.setVisible(true);
                     bottles.pack();
                 }
@@ -79,6 +81,8 @@ public class NewBottle extends JFrame{
                 try {
                     NewBottle.super.dispose();
                     JFrame bottles = new Bottles("Bottles");
+                    String src = "./files/window.png";
+                    bottles.setIconImage(new ImageIcon(src).getImage());
                     bottles.setVisible(true);
                     bottles.pack();
                 }

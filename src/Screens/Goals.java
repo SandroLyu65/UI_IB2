@@ -37,6 +37,8 @@ public class Goals extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 Goals.super.dispose();
                 JFrame home = new Home("D2 project V1.0_0311");
+                String src = "./files/window.png";
+                home.setIconImage(new ImageIcon(src).getImage());
                 home.setVisible(true);
                 home.pack();
             }
