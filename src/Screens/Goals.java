@@ -48,7 +48,7 @@ public class Goals extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Goals.super.dispose();
-                JFrame home = new Home("D2 project V1.0_0311");
+                JFrame home = new Home("Home");
                 String src = "./files/window.png";
                 home.setIconImage(new ImageIcon(src).getImage());
                 home.setVisible(true);

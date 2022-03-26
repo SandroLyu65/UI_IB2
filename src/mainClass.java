@@ -11,7 +11,7 @@ public class mainClass {
         InitialBottles.setBottles();
         InitialGoal.setDataset();
 
-        JFrame homeScreen = new Home("D2 project V1.0_0311");
+        JFrame homeScreen = new Home("Home");
         String src = "./files/window.png";
         homeScreen.setIconImage(new ImageIcon(src).getImage());
         homeScreen.setVisible(true);
