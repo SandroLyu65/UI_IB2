@@ -1,5 +1,6 @@
 package Jason;
 
+import Initial.InitialGoal;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +30,9 @@ public class BottlesInfo extends ParseJason {
             names.clear();
             capacities.clear();
             fileNames.clear();
+
             JSONArray array = new JSONArray(makeGETRequest(getUrl));
+
             int i = 0;
             while (i < 4 && array.length() - i - 1 >= 0) {
                 addToList(i, array);
@@ -44,6 +47,8 @@ public class BottlesInfo extends ParseJason {
         JSONObject curObject = array.getJSONObject(index);
         names.add(curObject.getString("name"));
         capacities.add(Double.parseDouble(curObject.getString("capacity")));
+        if(index == 0)
+            InitialGoal.setCapacity(Double.parseDouble(curObject.getString("capacity")));
         fileNames.add("./icons/" + curObject.getString("file_name"));
     }
 

@@ -1,4 +1,4 @@
-package Charts;
+package Initial;
 
 import Jason.EachDayLast7;
 import Jason.EachHourLast24;

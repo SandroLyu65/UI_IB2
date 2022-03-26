@@ -1,7 +1,7 @@
 package Screens;
 
-import Charts.InitialBottles;
-import Charts.InitialGoal;
+import Initial.InitialBottles;
+import Initial.InitialGoal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,13 +34,15 @@ public class Bottles extends JFrame{
     private JLabel cap3;
     private JLabel cap4;
     private JButton selectButton;
+    private static final Font uiFont = new Font("Segoe UI",Font.BOLD,16);
     private static final Font x = new Font("Monospaced",1,16);
 
     public Bottles(String title){
         super(title);
         setContentPane(bottlesPanel);
-        bottlesPanel.setPreferredSize(new Dimension(600,350));
+        bottlesPanel.setPreferredSize(new Dimension(800,350));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         selectRadioButton1.setVisible(false);
         selectRadioButton2.setVisible(false);
         selectRadioButton3.setVisible(false);
@@ -57,10 +59,16 @@ public class Bottles extends JFrame{
         cap2.setVisible(false);
         cap3.setVisible(false);
         cap4.setVisible(false);
-        colName1.setFont(x);
-        colName2.setFont(x);
-        colName3.setFont(x);
-        colName4.setFont(x);
+
+        colName1.setFont(uiFont);
+        colName2.setFont(uiFont);
+        colName3.setFont(uiFont);
+        colName4.setFont(uiFont);
+        addBottleButton.setFont(uiFont);
+        deleteButton.setFont(uiFont);
+        bottlesToHome.setFont(uiFont);
+        selectButton.setFont(uiFont);
+
         if(InitialBottles.getNames().size() >= 1){
             selectRadioButton1.setVisible(true);
             pic1.setVisible(true);
@@ -69,6 +77,7 @@ public class Bottles extends JFrame{
             pic1.setIcon(InitialBottles.getIcons().get(0));
             name1.setText(InitialBottles.getNames().get(0));
             cap1.setText(String.valueOf(InitialBottles.getCapacity().get(0)));
+            bottlesPanel.setPreferredSize(new Dimension(800,350));
         }
 
         if(InitialBottles.getNames().size() >= 2){
@@ -79,6 +88,7 @@ public class Bottles extends JFrame{
             pic2.setIcon(InitialBottles.getIcons().get(1));
             name2.setText(InitialBottles.getNames().get(1));
             cap2.setText(String.valueOf(InitialBottles.getCapacity().get(1)));
+            bottlesPanel.setPreferredSize(new Dimension(800,450));
         }
 
         if(InitialBottles.getNames().size() >= 3){
@@ -89,6 +99,7 @@ public class Bottles extends JFrame{
             pic3.setIcon(InitialBottles.getIcons().get(2));
             name3.setText(InitialBottles.getNames().get(2));
             cap3.setText(String.valueOf(InitialBottles.getCapacity().get(2)));
+            bottlesPanel.setPreferredSize(new Dimension(800,550));
         }
 
         if(InitialBottles.getNames().size() == 4){
@@ -99,6 +110,7 @@ public class Bottles extends JFrame{
             pic4.setIcon(InitialBottles.getIcons().get(3));
             name4.setText(InitialBottles.getNames().get(3));
             cap4.setText(String.valueOf(InitialBottles.getCapacity().get(3)));
+            bottlesPanel.setPreferredSize(new Dimension(800,650));
         }
 
         bottlesToHome.addActionListener(new ActionListener() {
@@ -110,6 +122,8 @@ public class Bottles extends JFrame{
                 home.setIconImage(new ImageIcon(src).getImage());
                 home.setVisible(true);
                 home.pack();
+                home.setLocationRelativeTo(null);
+                //home.setExtendedState(home.getExtendedState() | JFrame.MAXIMIZED_BOTH);
             };
         });
 
@@ -122,6 +136,7 @@ public class Bottles extends JFrame{
                 newBottle.setIconImage(new ImageIcon(src).getImage());
                 newBottle.setVisible(true);
                 newBottle.pack();
+                newBottle.setLocationRelativeTo(null);
             }
         });
 
@@ -142,10 +157,15 @@ public class Bottles extends JFrame{
                 }
                 try {
                     InitialBottles.setBottles();
+                    if(InitialBottles.getCapacity().size()==0) {
+                        InitialGoal.setCapacity(0.5);
+                        InitialGoal.setDataset();
+                    }
                     Bottles.super.dispose();
                     JFrame bottles = new Bottles("Bottles");
                     bottles.setVisible(true);
                     bottles.pack();
+                    bottles.setLocationRelativeTo(null);
                 }
                 catch (Exception b){
                     b.printStackTrace();

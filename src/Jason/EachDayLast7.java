@@ -25,7 +25,10 @@ public class EachDayLast7 extends ParseJason{
         try {
             for(int i = 6; i >= 0; i--){
                 String url = basicUrl + getDaysString(i);
-                addToList(getDaysString(i).substring(5), url);
+                if(i == 0)
+                    addToList("today", url);
+                else
+                    addToList(getDaysString(i).substring(5), url);
             }
         }
         catch (JSONException e){

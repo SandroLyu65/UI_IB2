@@ -1,4 +1,4 @@
-package Charts;
+package Initial;
 
 import Jason.EachHourLast24;
 import Jason.LEDInfo;
@@ -8,6 +8,7 @@ import org.jfree.data.general.DatasetUtilities;
 public class InitialGoal extends InitialChart{
     private static double capacity = 0.5;
     private static double todayFinished = 3.1;
+    private static boolean ledState = true;
     private static DefaultCategoryDataset bottlesDataset = new DefaultCategoryDataset();
 
     public InitialGoal() {
@@ -26,7 +27,7 @@ public class InitialGoal extends InitialChart{
         double[][] eachBottleArray= new double[2][amount];
 
         LEDInfo ledInfo = new LEDInfo();
-        if(todayFinished>=eachDayGoal)
+        if(!ledState || todayFinished>=eachDayGoal)
             ledInfo.updateLED(0,timer);
         else
             ledInfo.updateLED(1,timer);
@@ -53,12 +54,20 @@ public class InitialGoal extends InitialChart{
         capacity = newCapacity;
     }
 
+    public static void setLedState(boolean newLedState) {
+        ledState = newLedState;
+    }
+
     public static DefaultCategoryDataset getDataset(){
         return bottlesDataset;
     }
 
     public static double getCapacity() {
         return capacity;
+    }
+
+    public static boolean isLedState() {
+        return ledState;
     }
 
     public static double getTodayFinished() {

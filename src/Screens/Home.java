@@ -1,8 +1,8 @@
 package Screens;
 
-import Charts.InitialBottles;
-import Charts.InitialGoal;
-import Charts.InitialChart;
+import Initial.InitialBottles;
+import Initial.InitialChart;
+import Initial.InitialGoal;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -22,16 +22,17 @@ import java.awt.geom.Ellipse2D;
 public class Home extends JFrame {
     private JPanel myPanel;
     private JButton homeToBottle;
-    private JButton homeToGoal;
+    private JButton refreshButton;
     private JPanel barChartHourPanel;
     private JPanel lineChartPanel;
-    private JButton refreshButton;
+    private JButton homeToGoal;
     private JPanel barChartDayPanel;
     private JPanel bottlesPanel;
     private JLabel todayGoalLabel;
     private JLabel alreadyDrankLabel;
     private JLabel amountLabel;
     private JPanel pieChartPanel;
+    private static final Font uiFont = new Font("Segoe UI",Font.BOLD,16);
     private static final Font x = new Font("Monospaced",1,16);
     public Home(String title) {
         super(title);
@@ -41,6 +42,10 @@ public class Home extends JFrame {
         amountLabel.setFont(x);
         todayGoalLabel.setFont(x);
         alreadyDrankLabel.setFont(x);
+        homeToBottle.setFont(uiFont);
+        homeToGoal.setFont(uiFont);
+        refreshButton.setFont(uiFont);
+
         homeToBottle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -50,26 +55,14 @@ public class Home extends JFrame {
                 bottles.setIconImage(new ImageIcon(src).getImage());
                 bottles.setVisible(true);
                 bottles.pack();
-            }
-
-        });
-
-        homeToGoal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                Home.super.dispose();
-                JFrame goals = new Goals("Personal Goals");
-                String src = "./files/window.png";
-                goals.setIconImage(new ImageIcon(src).getImage());
-                goals.setVisible(true);
-                goals.pack();
+                bottles.setLocationRelativeTo(null);
             }
 
         });
 
         refreshButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
                 InitialChart.setDataset();
                 InitialBottles.setBottles();
                 InitialGoal.setDataset();
@@ -77,11 +70,26 @@ public class Home extends JFrame {
                 JFrame home = new Home("D2 project V1.0_0311");
                 home.setVisible(true);
                 home.pack();
+                home.setLocationRelativeTo(null);
+                //home.setExtendedState(home.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+            }
+        });
+
+        homeToGoal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Home.super.dispose();
+                JFrame goals = new Goals("Personal Goals");
+                String src = "./files/window.png";
+                goals.setIconImage(new ImageIcon(src).getImage());
+                goals.setVisible(true);
+                goals.pack();
+                goals.setLocationRelativeTo(null);
             }
         });
 
         alreadyDrankLabel.setText("Already drank:" + InitialGoal.getTodayFinished()+" L");
-        amountLabel.setText("You need " + (int) Math.ceil(InitialChart.getEachDayGoal()/ InitialGoal.getCapacity()) + " more bottles");
+        amountLabel.setText("You need " + (int) Math.ceil(InitialChart.getEachDayGoal()/ InitialGoal.getCapacity()) + " bottles today");
         todayGoalLabel.setText("Goal today: " + InitialChart.getEachDayGoal()+" L");
     }
 
@@ -93,7 +101,7 @@ public class Home extends JFrame {
         barChartDayPanel.setPreferredSize(new java.awt.Dimension(350, 250));
 
         bottlesPanel = new ChartPanel(creatBottlesChart());
-        bottlesPanel.setPreferredSize(new java.awt.Dimension(700, 250));
+        bottlesPanel.setPreferredSize(new java.awt.Dimension(700, 350));
     }
 
     private JFreeChart creatEachHourChart(){
@@ -104,9 +112,15 @@ public class Home extends JFrame {
                 InitialChart.getBarChartDataset(),
                 PlotOrientation.VERTICAL,
                 false, true, false);
-        //barChartHour.setBackgroundPaint(new Color(239, 70, 55));
-        Color color = new Color(237,238,237);
-        barChartHour.setBackgroundPaint(color);
+        barChartHour.setBackgroundPaint(new Color(237,238,237));
+
+        CategoryPlot bottlesPlot = barChartHour.getCategoryPlot();
+
+        BarRenderer barRenderer = (BarRenderer) bottlesPlot.getRenderer();
+        barRenderer.setShadowVisible(true);
+        barRenderer.setBarPainter(new StandardBarPainter());
+        barRenderer.setMaximumBarWidth(0.5f);
+        barRenderer.setSeriesPaint(0, new Color(239, 70, 55));
         return barChartHour;
     }
 
@@ -118,15 +132,17 @@ public class Home extends JFrame {
                 InitialChart.getBarChartDayDataset(),
                 PlotOrientation.VERTICAL,
                 false, false, false);
+        barChartDay.setBackgroundPaint(new Color(237,238,237));
+
         CategoryPlot categoryPlot = (CategoryPlot) barChartDay.getPlot();
         categoryPlot.setDataset(1, InitialChart.getLineBase());
-        //categoryPlot.getRenderer().setSeriesPaint(0, new Color(239, 70, 55));
+
         BarRenderer barRenderer = (BarRenderer) categoryPlot.getRenderer();
-        Color color = new Color(237,238,237);
-        barChartDay.setBackgroundPaint(color);
+        barRenderer.setShadowVisible(true);
+        barRenderer.setBarPainter(new StandardBarPainter());
         barRenderer.setMaximumBarWidth(0.5f);
         barRenderer.setSeriesPaint(0, new Color(239, 70, 55));
-        //categoryPlot.mapDatasetToRangeAxes(1,1);
+
         LineAndShapeRenderer lineAndShapeRenderer = new LineAndShapeRenderer();
         lineAndShapeRenderer.setShapesVisible(false);
         lineAndShapeRenderer.setLinesVisible(true);
@@ -140,22 +156,22 @@ public class Home extends JFrame {
 
     private JFreeChart creatBottlesChart() {
         JFreeChart bottlesChart = ChartFactory.createStackedBarChart(
-                "Total Bottles",
+                "Compliance of Goal",
                 "",
-                "Score",
+                "",
                 InitialGoal.getDataset(),
                 PlotOrientation.VERTICAL,
                 false, false, false);
-        Color color = new Color(237,238,237);
-        bottlesChart.setBackgroundPaint(color);
+        bottlesChart.setBackgroundPaint(new Color(237,238,237));
+
         CategoryPlot bottlesPlot = bottlesChart.getCategoryPlot();
-        BarRenderer categoryItemRenderer = (BarRenderer) bottlesPlot.getRenderer();
-        categoryItemRenderer.setShadowVisible(true);
-        categoryItemRenderer.setBarPainter(new StandardBarPainter());
+
+        BarRenderer barRenderer = (BarRenderer) bottlesPlot.getRenderer();
+        barRenderer.setShadowVisible(true);
+        barRenderer.setBarPainter(new StandardBarPainter());
         bottlesPlot.getRenderer().setSeriesPaint(0, new Color(239, 70, 55));
         bottlesPlot.getRenderer().setSeriesPaint(1, new Color(0, 172, 178));
         bottlesPlot.setRangeGridlinesVisible(false);
-        //bottlesPlot.setBackgroundPaint(Color.DARK_GRAY);
         bottlesPlot.setOutlineVisible(false);
         bottlesPlot.getDomainAxis().setVisible(false);
         bottlesPlot.getRangeAxis().setVisible(false);

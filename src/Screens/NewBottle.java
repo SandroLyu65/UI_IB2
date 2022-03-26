@@ -1,7 +1,7 @@
 package Screens;
 
-import Charts.InitialBottles;
-import Charts.InitialGoal;
+import Initial.InitialBottles;
+import Initial.InitialGoal;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -20,7 +20,9 @@ public class NewBottle extends JFrame{
     private JButton selectFromFileButton;
     private JLabel newPictureLabel;
     private JLabel newPicturePath;
-    private JButton BackToBottle;
+    private JButton backToBottle;
+    private static final Font uiFont = new Font("Segoe UI",Font.BOLD,16);
+    private static final Font x = new Font("Monospaced",1,16);
 
     public NewBottle(String title) {
         super(title);
@@ -29,18 +31,30 @@ public class NewBottle extends JFrame{
         newPicturePath.setSize(50,0);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        selectFromFileButton.setFont(uiFont);
+        backToBottle.setFont(uiFont);
+        newPictureLabel.setFont(uiFont);
+        newBottleNameLabel.setFont(uiFont);
+        newCapacityLabel.setFont(uiFont);
+        saveButton.setFont(uiFont);
+
+        newPicturePath.setVisible(false);
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     InitialBottles.insertRecord(newBottleNameTextField.getText(),newCapacityTextField.getText(),newPicturePath.getText());
                     InitialBottles.setBottles();
+                    if(InitialBottles.getCapacity().size()==1)
+                        InitialGoal.setDataset();
                     NewBottle.super.dispose();
                     JFrame bottles = new Bottles("Bottles");
                     String src = "./files/window.png";
                     bottles.setIconImage(new ImageIcon(src).getImage());
                     bottles.setVisible(true);
                     bottles.pack();
+                    bottles.setLocationRelativeTo(null);
                 }
                 catch (Exception e){
                     newBottleNameTextField.setText("Do that again");
@@ -70,12 +84,13 @@ public class NewBottle extends JFrame{
                         return;
                     }
                     //String absolutePath = jFileChooser.getSelectedFile().getAbsolutePath();
+                    newPicturePath.setVisible(true);
                     newPicturePath.setText(fileName);
                 }
             }
         });
 
-        BackToBottle.addActionListener(new ActionListener() {
+        backToBottle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -85,6 +100,7 @@ public class NewBottle extends JFrame{
                     bottles.setIconImage(new ImageIcon(src).getImage());
                     bottles.setVisible(true);
                     bottles.pack();
+                    bottles.setLocationRelativeTo(null);
                 }
                 catch (Exception b){
                     newBottleNameTextField.setText("Do that again");

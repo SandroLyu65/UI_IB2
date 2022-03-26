@@ -1,11 +1,10 @@
-package Charts;
+package Initial;
 
 import Jason.BottlesInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class InitialBottles {
     private static final BottlesInfo BottlesInfo = new BottlesInfo();

@@ -1,4 +1,4 @@
-package Charts;
+package Initial;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
