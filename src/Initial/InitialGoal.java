@@ -66,7 +66,7 @@ public class InitialGoal extends InitialChart{
         return capacity;
     }
 
-    public static boolean isLedState() {
+    public static boolean getLedState() {
         return ledState;
     }
 

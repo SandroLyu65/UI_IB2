@@ -8,8 +8,8 @@ public class GoalsInfo extends ParseJason{
     private final String updateUrl;
 
     public GoalsInfo() {
-        this.getUrl = "https://studev.groept.be/api/a21ib2d02/goalsget";
-        this.updateUrl = "https://studev.groept.be/api/a21ib2d02/GoalsSet/";
+        this.getUrl = "https://studev.groept.be/api/a21ib2d02/goal_get";
+        this.updateUrl = "https://studev.groept.be/api/a21ib2d02/goal_set/";
     }
 
     public double getGoal() {

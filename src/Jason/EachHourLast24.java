@@ -19,7 +19,7 @@ public class EachHourLast24 extends ParseJason{
 
     public EachHourLast24() {
         super();
-        this.basicUrl = "https://studev.groept.be/api/a21ib2d02/byHour_test_by_shengzhe_0310/";
+        this.basicUrl = "https://studev.groept.be/api/a21ib2d02/water_get_byHour/";
         hours = new ArrayList<>();
         eachHour = new ArrayList<>();
     }

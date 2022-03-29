@@ -36,8 +36,6 @@ public class InitialBottles {
         icons.clear();
         for (String path : paths) {
             ImageIcon newIcon = new ImageIcon(path);
-            int ratio = 100 / newIcon.getIconHeight();
-            int newWidth = ratio * newIcon.getIconWidth();
             Image img = newIcon.getImage().getScaledInstance(80, 100, Image.SCALE_DEFAULT);
             Icon finalIcon = new ImageIcon(img);
             icons.add(finalIcon);

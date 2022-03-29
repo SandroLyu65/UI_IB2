@@ -16,7 +16,7 @@ public class EachDayLast7 extends ParseJason{
 
     public EachDayLast7() {
         super();
-        this.basicUrl = "https://studev.groept.be/api/a21ib2d02/byDay_test_by_Shengzhe_0312/";
+        this.basicUrl = "https://studev.groept.be/api/a21ib2d02/water_get_byDay/";
         days = new ArrayList<>();
         eachDay = new ArrayList<>();
     }
