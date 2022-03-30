@@ -66,7 +66,7 @@ public class Home extends JFrame {
                 InitialBottles.setBottles();
                 InitialGoal.setDataset();
                 Home.super.dispose();
-                JFrame home = new Home("D2 project V1.0_0311");
+                JFrame home = new Home("D2 project");
                 home.setVisible(true);
                 home.pack();
                 home.setLocationRelativeTo(null);
@@ -155,7 +155,7 @@ public class Home extends JFrame {
 
     private JFreeChart creatBottlesChart() {
         JFreeChart bottlesChart = ChartFactory.createStackedBarChart(
-                "Compliance of Goal",
+                "Progress to Your Goal",
                 "",
                 "",
                 InitialGoal.getDataset(),
