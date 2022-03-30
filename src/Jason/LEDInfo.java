@@ -1,10 +1,5 @@
 package Jason;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import static java.lang.Double.parseDouble;
-
 public class LEDInfo extends ParseJason{
     private final String updateUrl;
 

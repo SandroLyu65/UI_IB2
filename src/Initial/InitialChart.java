@@ -5,7 +5,6 @@ import Jason.EachHourLast24;
 import Jason.GoalsInfo;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class InitialChart {
@@ -15,8 +14,6 @@ public class InitialChart {
     private static final DefaultCategoryDataset lineBase = new DefaultCategoryDataset();
     protected static double eachDayGoal = 4;
     protected static int timer = 10;
-
-    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public InitialChart() {
     }

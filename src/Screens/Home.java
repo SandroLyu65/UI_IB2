@@ -18,6 +18,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
+import java.text.DecimalFormat;
 
 public class Home extends JFrame {
     private JPanel myPanel;
@@ -34,6 +35,8 @@ public class Home extends JFrame {
     private JPanel pieChartPanel;
     private static final Font uiFont = new Font("Segoe UI",Font.BOLD,16);
     private static final Font x = new Font("Monospaced",1,16);
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+
     public Home(String title) {
         super(title);
         setContentPane(myPanel);
@@ -88,9 +91,9 @@ public class Home extends JFrame {
             }
         });
 
-        alreadyDrankLabel.setText("Already drank:" + InitialGoal.getTodayFinished()+" L");
+        alreadyDrankLabel.setText("Already drank:" + df.format(InitialGoal.getTodayFinished()+" L"));
         amountLabel.setText("You need " + (int) Math.ceil(InitialChart.getEachDayGoal()/ InitialGoal.getCapacity()) + " bottles today");
-        todayGoalLabel.setText("Goal today: " + InitialChart.getEachDayGoal()+" L");
+        todayGoalLabel.setText("Goal today: " + df.format(InitialChart.getEachDayGoal()+" L"));
     }
 
     private void createUIComponents() {
