@@ -68,8 +68,8 @@ public class NewBottle extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 JFileChooser jFileChooser = new JFileChooser();
                 jFileChooser.setMultiSelectionEnabled(true);
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg","png");
-                jFileChooser.setFileFilter(filter);
+                // FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg","png");
+                // jFileChooser.setFileFilter(filter);
                 int returnVal = jFileChooser.showOpenDialog(selectFromFileButton);
                 if (returnVal == jFileChooser.APPROVE_OPTION){
                     File[] arrfiles = jFileChooser.getSelectedFiles();

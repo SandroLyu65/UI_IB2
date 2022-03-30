@@ -17,6 +17,6 @@ public class mainClass {
         homeScreen.setVisible(true);
         homeScreen.pack();
         homeScreen.setLocationRelativeTo(null);
-        //homeScreen.setExtendedState(homeScreen.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        homeScreen.setExtendedState(homeScreen.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
 }

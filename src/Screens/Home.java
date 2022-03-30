@@ -70,7 +70,7 @@ public class Home extends JFrame {
                 home.setVisible(true);
                 home.pack();
                 home.setLocationRelativeTo(null);
-                //home.setExtendedState(home.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+                home.setExtendedState(home.getExtendedState() | JFrame.MAXIMIZED_BOTH);
             }
         });
 
