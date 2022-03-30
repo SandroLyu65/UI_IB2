@@ -18,24 +18,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
-import java.text.DecimalFormat;
 
 public class Home extends JFrame {
     private JPanel myPanel;
     private JButton homeToBottle;
     private JButton refreshButton;
     private JPanel barChartHourPanel;
-    private JPanel lineChartPanel;
     private JButton homeToGoal;
     private JPanel barChartDayPanel;
     private JPanel bottlesPanel;
     private JLabel todayGoalLabel;
     private JLabel alreadyDrankLabel;
     private JLabel amountLabel;
-    private JPanel pieChartPanel;
     private static final Font uiFont = new Font("Segoe UI",Font.BOLD,16);
     private static final Font x = new Font("Monospaced",1,16);
-    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Home(String title) {
         super(title);
@@ -91,9 +87,9 @@ public class Home extends JFrame {
             }
         });
 
-        alreadyDrankLabel.setText("Already drank:" + df.format(InitialGoal.getTodayFinished()+" L"));
+        alreadyDrankLabel.setText("Already drank:" + Math.round(InitialGoal.getTodayFinished()*100.0)/100.0+" L");
         amountLabel.setText("You need " + (int) Math.ceil(InitialChart.getEachDayGoal()/ InitialGoal.getCapacity()) + " bottles today");
-        todayGoalLabel.setText("Goal today: " + df.format(InitialChart.getEachDayGoal()+" L"));
+        todayGoalLabel.setText("Goal today: " + Math.round(InitialChart.getEachDayGoal()*100.0)/100.0+" L");
     }
 
     private void createUIComponents() {
