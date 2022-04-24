@@ -1,6 +1,6 @@
 package Jason;
 
-public class LEDInfo extends ParseJason{
+public class LEDInfo extends GetRequest{
     private final String updateUrl;
 
     public LEDInfo() {

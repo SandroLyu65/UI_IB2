@@ -3,7 +3,7 @@ package Jason;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class GoalsInfo extends ParseJason{
+public class GoalsInfo extends GetRequest{
     private final String getUrl;
     private final String updateUrl;
 

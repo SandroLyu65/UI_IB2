@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class BottlesInfo extends ParseJason {
+public class BottlesInfo extends GetRequest {
     private final String getUrl;
     private final String insertUrl;
     private final String deleteUrl;
