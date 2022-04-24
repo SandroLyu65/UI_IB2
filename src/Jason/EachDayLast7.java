@@ -16,16 +16,19 @@ public class EachDayLast7 extends GetRequest {
 
     public EachDayLast7() {
         super();
-        this.basicUrl = "https://studev.groept.be/api/a21ib2d02/byDay_test_by_Shengzhe_0312/";
+        this.basicUrl = "https://studev.groept.be/api/a21ib2d02/water_get_byDay/";
         days = new ArrayList<>();
         eachDay = new ArrayList<>();
     }
 
     public void setLists(){
         try {
-            for(int i = 7; i >= 1; i--){
+            for(int i = 6; i >= 0; i--){
                 String url = basicUrl + getDaysString(i);
-                addToList(getDaysString(i).substring(5), url);
+                if(i == 0)
+                    addToList("today", url);
+                else
+                    addToList(getDaysString(i).substring(5), url);
             }
         }
         catch (JSONException e){
@@ -45,8 +48,7 @@ public class EachDayLast7 extends GetRequest {
     }
 
     public String getDaysString(int minusDay){
-        //LocalDate todayDate = LocalDate.now();
-        LocalDate todayDate = LocalDate.of(2022,3,24);
+        LocalDate todayDate = LocalDate.now();
         return String.valueOf(todayDate.minusDays(minusDay));
     }
 
