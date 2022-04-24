@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import static java.lang.Double.parseDouble;
 
-public class EachDayLast7 extends ParseJason{
+public class EachDayLast7 extends GetRequest {
     private final String basicUrl;
     private final ArrayList<String> days;
     private final ArrayList<Double> eachDay;

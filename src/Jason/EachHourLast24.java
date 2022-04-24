@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 import static java.lang.Double.parseDouble;
 
-public class EachHourLast24 extends ParseJason{
+public class EachHourLast24 extends GetRequest {
     private final String basicUrl;
     private final ArrayList<String> hours;
     private final ArrayList<Double> eachHour;
